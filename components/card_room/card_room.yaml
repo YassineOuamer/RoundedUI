@@ -1,0 +1,95 @@
+card_room:
+  template:
+    - "card_button"
+    - "translation_engine"
+  variables:
+    navigation_path: ""
+    force_color: true
+    side_entity_only: false
+  tap_action:
+    action: "[[[ return (variables.navigation_path == '') ? 'none' : 'navigate' ]]]"
+    navigation_path: "[[[ return variables.navigation_path ]]]"
+  styles:
+    grid:
+      - grid-template-areas: |
+          [[[
+            return variables.side_entity_only ? '"space space e1" "i i e1" "n n e1" "l l e1"' : '"space space space" "i i i" "n n n" "l l l" "e1 e2 e3" "e4 e5 e6"';
+          ]]]
+      - grid-template-rows: auto 32px min-content min-content min-content min-content
+      - grid-template-columns: 1fr 1fr 1fr
+  custom_fields:
+    e1:
+      card:
+        type: "custom:button-card"
+        template: card_widget_icon
+        state:
+          - operator: "template"
+            value: "[[[ return !variables.entity_1; ]]]"
+            styles:
+              card:
+                - display: "none"
+        entity: "[[[ return variables?.entity_1; ]]]"
+        styles:
+          card:
+            - margin-top: 16px
+    e2:
+      card:
+        type: "custom:button-card"
+        template: card_widget_icon
+        state:
+          - operator: "template"
+            value: "[[[ return !variables.entity_2; ]]]"
+            styles:
+              card:
+                - display: "none"
+        entity: "[[[ return variables?.entity_2; ]]]"
+        styles:
+          card:
+            - margin-top: 16px
+    e3:
+      card:
+        type: "custom:button-card"
+        template: card_widget_icon
+        state:
+          - operator: "template"
+            value: "[[[ return !variables.entity_3; ]]]"
+            styles:
+              card:
+                - display: "none"
+        entity: "[[[ return variables?.entity_3; ]]]"
+        styles:
+          card:
+            - margin-top: 16px
+    e4:
+      card:
+        type: "custom:button-card"
+        template: card_widget_icon
+        state:
+          - operator: "template"
+            value: "[[[ return !variables.entity_4; ]]]"
+            styles:
+              card:
+                - display: "none"
+        entity: "[[[ return variables?.entity_4; ]]]"
+    e5:
+      card:
+        type: "custom:button-card"
+        template: card_widget_icon
+        state:
+          - operator: "template"
+            value: "[[[ return !variables.entity_5; ]]]"
+            styles:
+              card:
+                - display: "none"
+        entity: "[[[ return variables?.entity_5; ]]]"
+    e6:
+      card:
+        type: "custom:button-card"
+        template: card_widget_icon
+        state:
+          - operator: "template"
+            value: "[[[ return !variables.entity_6; ]]]"
+            styles:
+              card:
+                - display: "none"
+        entity: "[[[ return variables?.entity_6; ]]]"

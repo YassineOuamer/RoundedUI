@@ -1,0 +1,9 @@
+card_button_action:
+  template: card_base
+  show_name: false
+  aspect_ratio: 1/1
+  tap_action:
+    action: toggle
+  styles:
+    icon:
+      - width: 28%

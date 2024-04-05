@@ -1,0 +1,58 @@
+card_badge_alarm:
+  template:
+    - "card_badge"
+    - "translation_engine"
+  icon: |
+    [[[
+      var state = entity.state.toLowerCase();
+      var alarm_icon = {
+        "default": "mdi:shield-outline",
+        "armed_home": "mdi:shield-home",
+        "armed_away": "mdi:shield-lock",
+        "armed_night": "mdi:shield-moon",
+        "armed_vacation": "mdi:shield-airplane",
+        "disarmed": "mdi:shield-off",
+        "arming": "mdi:shield",
+        "triggered": "mdi:shield-alert"
+      }
+      return (alarm_icon[state] || alarm_icon["default"]);
+    ]]]
+  name: "[[[ return variables.translation_state ]]]"
+  show_label: false
+  styles:
+    card:
+      - background-color: >
+          [[[
+            var state = entity.state.toLowerCase();
+            var alarm_color = {
+              "default": "var(--orange)",
+              "armed_home": "var(--green)",
+              "armed_away": "var(--green)",
+              "armed_night": "var(--green)",
+              "armed_vacation": "var(--green)",
+              "disarmed": "var(--contrast20)",
+              "arming": "var(--orange)",
+              "triggered": "var(--red)"
+            }
+            return (alarm_color[state] || alarm_color["default"]);
+          ]]]
+    name:
+      - color: >
+          [[[
+            if (entity.state.toLowerCase() == 'disarmed') {
+              return 'var(--contrast1)';
+            }
+            else {
+              return 'var(--black)';
+            }
+          ]]]
+    icon:
+      - color: |
+          [[[
+            if (entity.state.toLowerCase() == 'disarmed') {
+              return 'var(--contrast1)';
+            }
+            else {
+              return 'var(--black)';
+            }
+          ]]]
