@@ -1,0 +1,48 @@
+widget_icon:
+  template: translation_engine
+  variables:
+    tap_action:
+      action: "toggle"
+    hold_action:
+      action: "more-info"
+  tap_action:
+    action: "[[[ return variables?.tap_action?.action ? variables.tap_action.action : 'none'; ]]]"
+    entity: "[[[ return variables.tap_action.entity; ]]]"
+    navigation_path: "[[[ return variables.tap_action.navigation_path; ]]]"
+    url_path: "[[[ return variables.tap_action.url_path; ]]]"
+    service: "[[[ return variables.tap_action.service; ]]]"
+    service_data: "[[[ return variables.tap_action.service_data; ]]]"
+  hold_action:
+    action: "[[[ return variables?.hold_action?.action ? variables.hold_action.action : 'none'; ]]]"
+    entity: "[[[ return variables.hold_action.entity; ]]]"
+    navigation_path: "[[[ return variables.hold_action.navigation_path; ]]]"
+    url_path: "[[[ return variables.hold_action.url_path; ]]]"
+    service: "[[[ return variables.hold_action.service; ]]]"
+    service_data: "[[[ return variables.hold_action.service_data; ]]]"
+  icon: "[[[ return variables?.icon; ]]]"
+  show_icon: true
+  show_name: false
+  styles:
+    icon:
+      - width: 22px
+      - line-height: "0"
+      - color: "var(--black-tint)"
+    img_cell:
+      - border-radius: "50%"
+      - background-color: "var(--white-tint)"
+    grid:
+      - grid-template-areas: "'i'"
+    card:
+      - height: 40px
+      - width: 40px
+      - box-shadow: "none"
+      - padding: "0px"
+      - background: none
+  state:
+    - operator: "template"
+      value: "[[[ return variables.active_state ]]]"
+      styles:
+        card:
+          - background-color: "var(--white)"
+        icon:
+          - color: "var(--black)"

@@ -1,0 +1,35 @@
+badge_alarm:
+  template: card_badge
+  icon: |
+    [[[
+      var state = entity.state.toLowerCase();
+      var alarm_icon = {
+        "default": "mdi:shield-outline",
+        "armed_home": "mdi:shield-home",
+        "armed_away": "mdi:shield-lock",
+        "armed_night": "mdi:shield-moon",
+        "armed_vacation": "mdi:shield-airplane",
+        "disarmed": "mdi:shield-off",
+        "arming": "mdi:shield",
+        "triggered": "mdi:shield-alert"
+      }
+      return (alarm_icon[state] || alarm_icon["default"]);
+    ]]]
+  name: "[[[ return variables.translation_state ]]]"
+  show_label: false
+  variables:
+    z_color: >
+      [[[
+          var state = entity.state.toLowerCase();
+          var alarm_color = {
+            "default": "orange",
+            "armed_home": "green",
+            "armed_away": "green",
+            "armed_night": "green",
+            "armed_vacation": "green",
+            "disarmed": "contrast20",
+            "arming": "orange",
+            "triggered": "red"
+          }
+          return (alarm_color[state] || alarm_color["default"]);
+      ]]]

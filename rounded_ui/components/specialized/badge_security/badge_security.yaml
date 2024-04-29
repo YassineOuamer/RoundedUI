@@ -1,0 +1,95 @@
+badge_security:
+  template: card_badge
+  triggers_update:
+    - "[[[ return variables.doors_entities ]]]"
+    - "[[[ return variables.motions_entities ]]]"
+    - "[[[ return variables.windows_entities ]]]"
+  label: >
+    [[[
+      if (variables.doors_entities && states[variables.doors_entities].state != '0') {
+        if(states[variables.doors_entities].state == '1') {
+          return "door open";
+        }
+        else {
+          return "doors open";
+        }
+      }
+      else if (variables.windows_entities && states[variables.windows_entities].state != '0') {
+        if(states[variables.windows_entities].state == '1') {
+          return "window open";
+        }
+        else {
+          return "windows open";
+        }
+      }
+      else if (variables.motions_entities && states[variables.motions_entities].state != '0') {
+        if(states[variables.motions_entities].state == '1') {
+          return "room with activity";
+        }
+        else {
+          return "rooms with activity";
+        }
+      }
+      else {
+        return "Activity";
+      }
+    ]]]
+  name: >
+    [[[
+      if (variables.doors_entities && states[variables.doors_entities].state != '0') {
+        if(states[variables.doors_entities].state == '1') {
+          return "1";
+        }
+        else {
+          return states[variables.doors_entities].state;
+        }
+      }
+      else if (variables.windows_entities && states[variables.windows_entities].state != '0') {
+        if(states[variables.windows_entities].state == '1') {
+          return "1";
+        }
+        else {
+          return states[variables.windows_entities].state;
+        }
+      }
+      else if (variables.motions_entities && states[variables.motions_entities].state != '0') {
+        if(states[variables.motions_entities].state == '1') {
+          return "1";
+        }
+        else {
+          return states[variables.motions_entities].state;
+        }
+      }
+      else {
+        return "No";
+      }
+    ]]]
+  icon: >
+    [[[
+      if (variables.doors_entities && states[variables.doors_entities].state != '0') {
+        return "mdi:door-open";
+      }
+      else if (variables.windows_entities && states[variables.windows_entities].state != '0') {
+        return "mdi:window-open";
+      }
+      else if (variables.motions_entities && states[variables.motions_entities].state != '0') {
+        return "mdi:motion-sensor";
+      }
+      else {
+        return "mdi:sleep";
+      }
+    ]]]
+  variables:
+    z_color: >
+      [[[
+        if (variables.doors_entities && states[variables.doors_entities].state != '0') {
+          return "red";
+        }
+        else if ((variables.motions_entities && states[variables.motions_entities].state != '0') ||
+                (variables.windows_entities && states[variables.windows_entities].state != '0')) {
+          return "orange";
+        }
+        else {
+          return "contrast20";
+        }
+      ]]]

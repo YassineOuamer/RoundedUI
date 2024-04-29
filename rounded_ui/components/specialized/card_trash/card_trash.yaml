@@ -1,0 +1,33 @@
+card_trash:
+  variables:
+    short_name: false
+  triggers_update:
+    - "[[[ return variables.kind ]]]"
+  template: card_stats
+  icon: |
+    [[[
+      var trash_icon = {
+        "default": "mdi:recycle",
+        "gft": "mdi:food-apple",
+        "pmd": "mdi:bottle-soda-classic",
+        "papier": "mdi:package-variant",
+        "best-tas": "mdi:tshirt-crew",
+        "restafval": "mdi:trash-can"
+      }
+      return (trash_icon[variables.kind] || trash_icon["default"]);
+    ]]]
+  label: "[[[ return (entity.attributes.Days_until == 1) ? 'Tomorrow' : (entity.attributes.Days_until == 0) ? 'Today' : entity.attributes.Days_until; ]]]"
+  name: >
+    [[[
+      var trash_label = {
+        "default": "",
+        "gft": "Groente, fruit en tuinafval",
+        "pmd": "Plastic, metaal, drankkartons",
+        "papier": "Papier en kartons",
+        "best-tas": "BEST-tas",
+        "restafval": "Restafval"
+      }
+      return variables.short_name ? variables.kind.charAt(0).toUpperCase() + variables.kind.slice(1) : (trash_label[variables.kind] || trash_label["default"]);
+    ]]]
+  custom_fields:
+    unit: "[[[ return (entity.attributes.Days_until > 1) ? 'Days' : ''; ]]]"

@@ -1,0 +1,36 @@
+display_camera:
+  show_live_stream: true
+  aspect_ratio: 16/9
+  styles:
+    card:
+      - height: 100%
+    name:
+      - position: absolute
+      - bottom: 24px;
+      - left: 24px;
+      - font-size: 12px;
+      - line-height: 18px;
+      - background: var(--black);
+      - color: var(--white);
+      - padding: 6px 10px;
+      - border-radius: 100px;
+      - z-index: 1;
+    img_cell:
+      - position: absolute
+      - top: 0
+      - left: 0
+      - right: 0
+      - bottom: 0
+    entity_picture:
+      - width: |
+          [[[
+            if(!variables.fill_height) {
+              return '100%';
+            }
+          ]]]
+      - height: |
+          [[[
+            if(variables.fill_height) {
+              return '100%';
+            }
+          ]]]

@@ -1,0 +1,94 @@
+card_stats:
+  template: base_layout
+  show_label: true
+  label: "[[[ return entity.state ]]]"
+  variables:
+    show_graph: false
+    show_progress: false
+    hours_to_show: 24
+    detail: 2
+    refined_progress: false
+  styles:
+    grid:
+      - grid-template-areas: '"space space" "i i" "l unit" "n n" "progress progress"'
+      - grid-template-columns: min-content 1fr
+      - grid-template-rows: auto 32px min-content min-content min-content
+    label:
+      - z-index: 1
+      - font-size: 32px
+      - color: |
+          [[[
+            if(variables.force_color){
+              return (variables.z_color == 'contrast2') ? 'var(--contrast20)' : (variables.z_color == 'contrast20') ? 'var(--contrast1)' : 'var(--black)';
+            }
+            else {
+              return 'var(--contrast20)';
+            }
+          ]]]
+    name:
+      - justify-self: start
+      - font-size: 12px
+      - margin-top: "-2px"
+      - text-align: left
+      - z-index: 1
+    icon:
+      - z-index: 1
+      - width: 24px
+    img_cell:
+      - justify-content: flex-start
+      - height: 32px
+      - margin-top: "0px"
+    custom_fields:
+      unit:
+        - z-index: 1
+        - font-size: 12px
+        - margin-bottom: 6px
+        - color: |
+            [[[
+              if(variables.force_color){
+                return (variables.z_color == 'contrast2') ? 'var(--contrast11)' : (variables.z_color == 'contrast20') ? 'var(--contrast1)' : 'var(--black)';
+              }
+              else {
+                return 'var(--contrast11)';
+              }
+            ]]]
+        - padding-left: 2px
+        - align-self: end
+        - text-align: left
+      graph:
+        - display: "[[[ if(!variables.show_graph) return 'none'; ]]]"
+        - position: absolute
+        - left: 0
+        - right: 0
+        - bottom: 0
+      progress:
+        - margin-top: 8px
+        - display: "[[[ if(!variables.show_progress) return 'none'; ]]]"
+  custom_fields:
+    unit: "[[[ return entity.attributes.unit_of_measurement ]]]"
+    graph:
+      card:
+        type: sensor
+        entity: "[[[ return entity.entity_id; ]]]"
+        hours_to_show: "[[[ return variables.hours_to_show; ]]]"
+        detail: "[[[ return variables.detail; ]]]"
+        graph: line
+        icon: none
+        card_mod:
+          class: "[[[ return 'embgraph ' + ((variables.force_color) ? variables.z_color : 'contrast2'); ]]]"
+    progress:
+      card:
+        type: "custom:button-card"
+        template: widget_progress
+        entity: "[[[ return entity.entity_id; ]]]"
+        variables:
+          z_color: |
+            [[[
+              if(variables.force_color){
+                return (variables.z_color == 'contrast2') ? 'contrast20' : (variables.z_color == 'contrast20') ? 'contrast1' : 'black';
+              }
+              else {
+                return variables.z_color;
+              }
+            ]]]
+          refined: "[[[ return variables.refined_progress; ]]]"

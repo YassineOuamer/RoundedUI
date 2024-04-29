@@ -1,0 +1,17 @@
+base_layout:
+  template: base_color
+  tap_action:
+    action: none
+  hold_action:
+    action: none
+  double_tap_action:
+    action: none
+  styles:
+    card:
+      - border-radius: 24px
+      - white-space: normal
+      - text-align: left
+      - height: 100%
+      - padding: 12px 20px 16px 20px
+      - box-sizing: border-box
+      - box-shadow: none

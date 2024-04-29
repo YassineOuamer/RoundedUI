@@ -1,0 +1,32 @@
+card_update:
+  template: card_entities
+  name: >
+    [[[
+      return entity.attributes.friendly_name.endsWith('Update') ? entity.attributes.friendly_name.slice(0, -6).trim() :
+          entity.attributes.friendly_name.endsWith('Firmware') ? entity.attributes.friendly_name.slice(0, -8).trim() : entity.attributes.friendly_name;
+    ]]]
+  tap_action:
+    action: more-info
+  variables:
+    z_color: orange
+    entity_1:
+      icon: "mdi:package-down"
+      entity_id: "[[[ return entity.entity_id ]]]"
+      tap_action:
+        action: "call-service"
+        service: "update.install"
+        service_data:
+          entity_id: "[[[ return entity.entity_id ]]]"
+    entity_3:
+      icon: "mdi:cancel"
+      entity_id: "[[[ return entity.entity_id ]]]"
+      hold_action:
+        action: "call-service"
+        service: "update.clear_skipped"
+        service_data:
+          entity_id: "[[[ return entity.entity_id ]]]"
+      tap_action:
+        action: "call-service"
+        service: "update.skip"
+        service_data:
+          entity_id: "[[[ return entity.entity_id ]]]"

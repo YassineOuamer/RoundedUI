@@ -1,0 +1,44 @@
+card_trash_upcoming:
+  template: card_trash
+  variables:
+    force_color: true
+    z_color: >
+      [[[
+        var trash_color = {
+          "default": "contrast2",
+          "gft": "green",
+          "pmd": "orange",
+          "papier": "blue",
+          "best-tas": "purple",
+          "restafval": "contrast20"
+        }
+        return (trash_color[entity.attributes.Upcoming_waste_types.toLowerCase()] || trash_color["default"]);
+      ]]]
+    kind: "[[[ return entity.attributes.Upcoming_waste_types.toLowerCase(); ]]]"
+  label: >
+    [[[
+      if(entity.state.state !== 'None'){
+        const oneDay = 24 * 60 * 60 * 1000;
+        var parts = entity.attributes.Upcoming_day.split('-');
+        var days_until = Math.ceil(((new Date(parts[2], parts[1] - 1, parts[0])) - (new Date())) / oneDay);
+        return (days_until == 1) ? 'Tomorrow' : (days_until == 0) ? 'Today' : days_until;
+      }
+      else {
+        return 'No upcoming plan';
+      }
+    ]]]
+  show_label: "[[[ return (entity.state !== 'None'); ]]]"
+  custom_fields:
+    unit: >
+      [[[
+        if(entity.state !== 'None'){
+          const oneDay = 24 * 60 * 60 * 1000;
+          var parts = entity.attributes.Upcoming_day.split('-');
+          var days_until = Math.ceil(((new Date(parts[2], parts[1] - 1, parts[0])) - (new Date())) / oneDay);
+          return (days_until > 1) ? 'Days' : '';
+          return 'Days';
+        }
+        else {
+          return '';
+        }
+      ]]]

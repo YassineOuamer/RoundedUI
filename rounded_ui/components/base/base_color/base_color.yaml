@@ -1,0 +1,66 @@
+base_color:
+  template: translation_engine
+  variables:
+    z_color: "contrast2"
+    force_color: false
+  styles:
+    card:
+      - background-color: |
+          [[[
+            if(variables.force_color) {
+              return 'var(--' + variables.z_color + ')';
+            } else {
+              return 'var(--contrast2)';
+            }
+          ]]]
+    icon:
+      - color: |
+          [[[
+            if(variables.force_color){
+              return (variables.z_color == 'contrast2') ? 'var(--contrast20)' : (variables.z_color == 'contrast20') ? 'var(--contrast1)' : 'var(--black)';
+            }
+            else {
+              return 'var(--contrast20)';
+            }
+          ]]]
+    name:
+      - color: |
+          [[[
+            if(variables.force_color){
+              return (variables.z_color == 'contrast2') ? 'var(--contrast20)' : (variables.z_color == 'contrast20') ? 'var(--contrast1)' : 'var(--black)';
+            }
+            else {
+              return 'var(--contrast20)';
+            }
+          ]]]
+    label:
+      - color: |
+          [[[
+            if(variables.force_color){
+              return (variables.z_color == 'contrast2') ? 'var(--contrast11)' : (variables.z_color == 'contrast20') ? 'var(--contrast12)' : 'var(--black)';
+            }
+            else {
+              return 'var(--contrast11)';
+            }
+          ]]]
+  state:
+    - operator: "template"
+      value: "[[[ return variables.active_state; ]]]"
+      styles:
+        card:
+          - background-color: "[[[ return 'var(--' + variables.z_color + ')'; ]]]"
+        icon:
+          - color: |
+              [[[
+                return (variables.z_color == 'contrast2') ? 'var(--contrast20)' : (variables.z_color == 'contrast20') ? 'var(--contrast1)' : 'var(--black)';
+              ]]]
+        name:
+          - color: |
+              [[[
+                return (variables.z_color == 'contrast2') ? 'var(--contrast20)' : (variables.z_color == 'contrast20') ? 'var(--contrast1)' : 'var(--black)';
+              ]]]
+        label:
+          - color: |
+              [[[
+                return (variables.z_color == 'contrast2') ? 'var(--contrast20)' : (variables.z_color == 'contrast20') ? 'var(--contrast12)' : 'var(--black)';
+              ]]]

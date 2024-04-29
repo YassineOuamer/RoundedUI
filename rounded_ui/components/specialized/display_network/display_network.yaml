@@ -1,0 +1,93 @@
+display_network:
+  template: card_display
+  triggers_update:
+    - "[[[ return variables.upload_entity ]]]"
+    - "[[[ return variables.download_entity ]]]"
+    - "[[[ return variables.ip_entity ]]]"
+  variables:
+    z_color: "[[[ return (entity.state == 'on') ? 'blue' : 'red'; ]]]"
+  tap_action:
+    action: call-service
+    service: homeassistant.update_entity
+    target:
+      entity_id:
+        - "[[[ return variables.download_entity ]]]"
+  show_icon: false
+  name: "[[[ return (entity.state == 'on') ? 'Connected' : 'Disconnected'; ]]]"
+  label: >
+    [[[
+      if(variables.ip_entity) {
+        return states[variables.ip_entity].state;
+      }
+    ]]]
+  styles:
+    grid:
+      - grid-template-areas: '"speed gutter n" "speed gutter l"'
+      - grid-template-columns: min-content 24px 1fr
+      - grid-template-rows: 1fr 1fr
+  custom_fields:
+    speed:
+      card:
+        type: custom:button-card
+        template: widget_info
+        variables:
+          z_color: "[[[ return variables.z_color; ]]]"
+        name: >
+          [[[
+            if(entity.state == "on" && variables.download_entity &&
+                variables.upload_entity && states[variables.upload_entity].state != 'unavailable' &&
+                states[variables.download_entity].state != 'unavailable'){
+              return Math.round(states[variables.download_entity].state);
+            }
+            else {
+              return '';
+            }
+          ]]]
+        label: >
+          [[[
+            if(entity.state == "on" && variables.download_entity &&
+                variables.upload_entity && states[variables.upload_entity].state != 'unavailable' &&
+                states[variables.download_entity].state != 'unavailable'){
+              return Math.round(states[variables.upload_entity].state);
+            }
+            else {
+              return '';
+            }
+          ]]]
+        icon: >
+          [[[
+            if(entity.state != "on") {
+              return 'mdi:network-off';
+            }
+            else if(!variables.download_entity && !variables.upload_entity) {
+              return 'mdi:check-network';
+            }
+            else {
+              return 'mdi:help-network';
+            }
+          ]]]
+        custom_fields:
+          extra: >
+            [[[
+              if(entity.state == "on" && variables.download_entity &&
+                  variables.upload_entity && states[variables.upload_entity].state != 'unavailable' &&
+                  states[variables.download_entity].state != 'unavailable'){
+                return states[variables.download_entity].attributes.unit_of_measurement;
+              }
+              else {
+                return '';
+              }
+            ]]]
+        show_icon: >
+          [[[
+            if(entity.state != 'on' || !variables.upload_entity ||
+              !variables.download_entity ||
+              states[variables.upload_entity].state == 'unavailable' ||
+              states[variables.download_entity].state == 'unavailable')
+            {
+              return true;
+            }
+            else {
+              return false;
+            }
+          ]]]

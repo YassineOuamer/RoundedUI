@@ -1,0 +1,38 @@
+card_power:
+  template: card_stats
+  variables:
+    force_color: "[[[ return (parseFloat(entity.state) != 0); ]]]"
+  styles:
+    grid:
+      - grid-template-areas: '"space space" "i i" "l unit" "n n"'
+      - grid-template-columns: min-content 1fr
+      - grid-template-rows: auto 32px min-content min-content
+  label: >
+    [[[
+      const conv = {
+        'w'  : 1,
+        'kw' : 1000,
+        'mw' : 1000000
+      }
+      var wValue = parseFloat(entity.state) * conv[entity.attributes.unit_of_measurement.toLowerCase()];
+      if(wValue > 1000)
+        return (wValue / 1000).toFixed(2);
+      else if(wValue > 1000000)
+        return (wValue / 1000000).toFixed(2);
+      return wValue.toFixed(0);
+    ]]]
+  custom_fields:
+    unit: >
+      [[[
+        const conv = {
+          'w'  : 1,
+          'kw' : 1000,
+          'mw' : 1000000
+        }
+        var wValue = parseFloat(entity.state) * conv[entity.attributes.unit_of_measurement.toLowerCase()];
+        if(wValue > 1000)
+          return 'kW';
+        else if(wValue > 1000000)
+          return 'MW';
+        return 'W';
+      ]]]

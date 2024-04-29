@@ -1,0 +1,8 @@
+card_room:
+  template: card_entities
+  variables:
+    navigation_path: ""
+    force_color: true
+  tap_action:
+    action: "[[[ return (variables.navigation_path == '') ? 'none' : 'navigate' ]]]"
+    navigation_path: "[[[ return variables.navigation_path ]]]"

@@ -30,6 +30,7 @@ Rounded:
   app-header-selection-bar-color: transparant
   app-header-edit-background-color: var(--contrast2)
   app-header-edit-text-color: var(--contrast20)
+  paper-tab-ink: transparent
   # Cards
   card-background-color: var(--contrast2)
   ha-card-background: var(--contrast2)
@@ -165,6 +166,27 @@ Rounded:
   white3: "#EAEDF6"
   white2: "#F4F6FB"
   white1: "#FFFFFF"
+  # Contrast rgb variables
+  black1-rgb: "0,0,0"
+  black2-rgb: "17,19,24"
+  black3-rgb: "23,26,33"
+  black4-rgb: "28,31,39"
+  black5-rgb: "38,42,53"
+  black6-rgb: "53,57,70"
+  black7-rgb: "67,72,86"
+  black8-rgb: "83,88,101"
+  black9-rgb: "99,103,116"
+  black10-rgb: "119,122,131"
+  white10-rgb: "137,140,148"
+  white9-rgb: "150,154,166"
+  white8-rgb: "164,169,182"
+  white7-rgb: "179,184,198"
+  white6-rgb: "195,200,213"
+  white5-rgb: "212,216,226"
+  white4-rgb: "225,229,239"
+  white3-rgb: "234,237,246"
+  white2-rgb: "244,246,251"
+  white1-rgb: "255,255,255"
 
   ########################################################
   ############### Variables based on modes ###############
@@ -196,7 +218,26 @@ Rounded:
       # Color tint transparancy
       color-tint: "0.15"
       # Contrast RGB variables
-      contrast1-RGB: 0,0,0
+      contrast1-RGB: var(--black1-rgb)
+      contrast2-RGB: var(--black2-rgb)
+      contrast3-RGB: var(--black3-rgb)
+      contrast4-RGB: var(--black4-rgb)
+      contrast5-RGB: var(--black5-rgb)
+      contrast6-RGB: var(--black6-rgb)
+      contrast7-RGB: var(--black7-rgb)
+      contrast8-RGB: var(--black8-rgb)
+      contrast9-RGB: var(--black9-rgb)
+      contrast10-RGB: var(--black10-rgb)
+      contrast11-RGB: var(--white10-rgb)
+      contrast12-RGB: var(--white9-rgb)
+      contrast13-RGB: var(--white8-rgb)
+      contrast14-RGB: var(--white7-rgb)
+      contrast15-RGB: var(--white6-rgb)
+      contrast16-RGB: var(--white5-rgb)
+      contrast17-RGB: var(--white4-rgb)
+      contrast18-RGB: var(--white3-rgb)
+      contrast19-RGB: var(--white2-rgb)
+      contrast20-RGB: var(--white1-rgb)
 
     light:
       # Black white contrats
@@ -223,7 +264,26 @@ Rounded:
       # Color tint transparancy
       color-tint: "0.20"
       # Contrast RGB variables
-      contrast1-RGB: 255,255,255
+      contrast1-RGB: var(--white1-rgb)
+      contrast2-RGB: var(--white2-rgb)
+      contrast3-RGB: var(--white3-rgb)
+      contrast4-RGB: var(--white4-rgb)
+      contrast5-RGB: var(--white5-rgb)
+      contrast6-RGB: var(--white6-rgb)
+      contrast7-RGB: var(--white7-rgb)
+      contrast8-RGB: var(--white8-rgb)
+      contrast9-RGB: var(--white9-rgb)
+      contrast10-RGB: var(--white10-rgb)
+      contrast11-RGB: var(--black10-rgb)
+      contrast12-RGB: var(--black9-rgb)
+      contrast13-RGB: var(--black8-rgb)
+      contrast14-RGB: var(--black7-rgb)
+      contrast15-RGB: var(--black6-rgb)
+      contrast16-RGB: var(--black5-rgb)
+      contrast17-RGB: var(--black4-rgb)
+      contrast18-RGB: var(--black3-rgb)
+      contrast19-RGB: var(--black2-rgb)
+      contrast20-RGB: var(--black1-rgb)
 
   card-mod-theme: Rounded
 
@@ -239,11 +299,26 @@ Rounded:
 
       #view {
         margin-top: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 64px !important;
       }
-      .header {
-        top: auto !important;
-        bottom: 0;
-        background-color: rgba(var(--contrast1-RGB),0.6) !important;
+      @media screen and (min-aspect-ratio:1/1) and (max-aspect-ratio:1/1) {
+        /* Hide bottom tabbar for square screen */
+        .header {
+          display: none;
+        }
+      }
+      @media not screen and (min-aspect-ratio:1/1) and (max-aspect-ratio:1/1) {
+        /* Show bottom tabbar for other than square screens */
+        .header {
+          top: auto !important;
+          bottom: 10px;
+          background-color: rgba(var(--contrast3-RGB),0.6) !important;
+          left: 24px;
+          right: 24px;
+          width: auto !important;
+          border-radius: 16px;
+        }
       }
       @supports (backdrop-filter: none) {
         .header {
@@ -254,8 +329,11 @@ Rounded:
         box-shadow: none !important;
       }
       .toolbar {
-        height: 80px !important;
+        height: 60px !important;
         padding: 4px 4px 4px 4px !important;
+      }
+      .toolbar .main-title {
+        color: transparent;
       }
       paper-tab {
         color: var(--contrast10);
@@ -273,11 +351,15 @@ Rounded:
       }
 
   card-mod-view-yaml: |
+    .: |
+      hui-panel-view {
+        overflow: hidden;
+      }
+
     hui-masonry-view:
       $: |
 
         /* Swipecard full width on mobile */
-
         @media screen and (max-width: 599px) {
           #columns .column swipe-card {
             margin-left: -4px;
@@ -339,44 +421,95 @@ Rounded:
         z-index: 1;
       }
 
-      .graph.luminance {
+      .graph.yellow {
         background: var(--yellow-tint);
         --accent-color: var(--yellow);
       }
-      .graph.temperature {
+      .graph.red {
         background: var(--red-tint);
         --accent-color: var(--red);
       }
-      .graph.humidity {
+      .graph.blue {
         background: var(--blue-tint);
         --accent-color: var(--blue);
       }
-
-      /* Camera card style */
-      
-      .camera {
-        display: flex;
-        overflow: hidden; /* Temporary fix for graph overflow bug */
+      .graph.purple {
+        background: var(--purple-tint);
+        --accent-color: var(--purple);
+      }
+      .graph.orange {
+        background: var(--orange-tint);
+        --accent-color: var(--orange);
+      }
+      .graph.green {
+        background: var(--green-tint);
+        --accent-color: var(--green);
       }
 
-      .camera .footer {
-        background-color: transparent !important;
-        padding: 24px;
-        order: 1;
+      /* Embedded graph */
+      .embgraph {
+        background: none;
+        border-radius: 0;
       }
-
-      .camera .footer > div:first-child {
-        font-size: 12px;
-        line-height: 18px;
-        background: var(--black);
-        color: var(--white);
-        padding: 6px 10px;
-        border-radius: 100px;
-        z-index: 1;
+      .embgraph:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
       }
-
-      .camera .footer > div:last-child {
-        display: none;
+      .embgraph .header, .embgraph .info {
+        display: none !important;
+      }
+      .embgraph.contrast2 {
+        --accent-color: var(--contrast19);
+      }
+      .embgraph.contrast2:before {
+        box-shadow: inset 120px 0px 20px 0px var(--contrast2);
+      }
+      .embgraph.contrast20 {
+        --accent-color: var(--contrast2);
+      }
+      .embgraph.contrast20:before {
+        box-shadow: inset 120px 0px 20px 0px var(--contrast19);
+      }
+      .embgraph.yellow {
+        --accent-color: var(--black10);
+      }
+      .embgraph.yellow:before {
+        box-shadow: inset 120px 0px 20px 0px var(--yellow-color);
+      }
+      .embgraph.red {
+        --accent-color: var(--black10);
+      }
+      .embgraph.red:before {
+        box-shadow: inset 120px 0px 20px 0px var(--red-color);
+      }
+      .embgraph.blue {
+        --accent-color: var(--black10);
+      }
+      .embgraph.blue:before {
+        box-shadow: inset 120px 0px 20px 0px var(--blue-color);
+      }
+      .embgraph.purple {
+        --accent-color: var(--black10);
+      }
+      .embgraph.purple:before {
+        box-shadow: inset 120px 0px 20px 0px var(--purple-color);
+      }
+      .embgraph.orange {
+        --accent-color: var(--black10);
+      }
+      .embgraph.orange:before {
+        box-shadow: inset 120px 0px 20px 0px var(--orange-color);
+      }
+      .embgraph.green {
+        --accent-color: var(--black10);
+      }
+      .embgraph.green:before {
+        box-shadow: inset 120px 0px 20px 0px var(--green-color);
       }
 
       /* Entities card style */

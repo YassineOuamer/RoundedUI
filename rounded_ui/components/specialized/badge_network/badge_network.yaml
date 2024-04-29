@@ -1,0 +1,77 @@
+badge_network:
+  template: card_badge
+  triggers_update:
+    - "[[[ return variables.updates_entities ]]]"
+    - "[[[ return variables.batteries_entities ]]]"
+    - "[[[ return variables.zigbee_entity ]]]"
+  label: >
+    [[[
+      if (variables.zigbee_entity && states[variables.zigbee_entity].state != 'on') {
+        return 'not working';
+      }
+      else if (variables.batteries_entities && states[variables.batteries_entities].state != '0') {
+        if(states[variables.batteries_entities].state == '1') {
+          return "device with low battery";
+        }
+        else {
+          return "devices with low batteries";
+        }
+      }
+      else if (variables.updates_entities && states[variables.updates_entities].state != '0') {
+        if(states[variables.updates_entities].state == '1') {
+          return "update pending";
+        }
+        else {
+          return "updates pending";
+        }
+      }
+      else {
+        return "network";
+      }
+    ]]]
+  name: >
+    [[[
+      if (variables.zigbee_entity && states[variables.zigbee_entity].state != 'on') {
+        return 'Zigbee';
+      }
+      else if (variables.batteries_entities && states[variables.batteries_entities].state != '0') {
+        return states[variables.batteries_entities].state;
+      }
+      else if (variables.updates_entities && states[variables.updates_entities].state != '0') {
+        return states[variables.updates_entities].state;
+      }
+      else {
+        return "Healthy";
+      }
+    ]]]
+  icon: >
+    [[[
+      if (variables.zigbee_entity && states[variables.zigbee_entity].state != 'on') {
+        return "mdi:zigbee";
+      }
+      else if (variables.batteries_entities && states[variables.batteries_entities].state != '0') {
+        return "mdi:battery-alert";
+      }
+      else if (variables.updates_entities && states[variables.updates_entities].state != '0') {
+        return "mdi:cloud-download";
+      }
+      else {
+        return "mdi:check-bold";
+      }
+    ]]]
+  variables:
+    z_color: >
+      [[[
+        if (variables.zigbee_entity && states[variables.zigbee_entity].state != 'on') {
+          return "red";
+        }
+        else if (variables.batteries_entities && states[variables.batteries_entities].state != '0') {
+          return "red";
+        }
+        else if (variables.updates_entities && states[variables.updates_entities].state != '0') {
+          return "orange";
+        }
+        else {
+          return "contrast20";
+        }
+      ]]]

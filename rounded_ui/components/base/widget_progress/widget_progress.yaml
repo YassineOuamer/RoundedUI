@@ -1,0 +1,147 @@
+widget_progress:
+  variables:
+    z_color: blue
+    refined: false
+  show_label: false
+  show_icon: false
+  show_name: false
+  tap_action:
+    action: none
+  hold_action:
+    action: none
+  double_tap_action:
+    action: none
+  styles:
+    card:
+      - background: none
+    grid:
+      - grid-template-areas: |
+          [[[
+            return variables.refined ? '"i1 i2 i3 i4 i5 i6 i7 i8 i9 i10"' : '"i1 i2 i3 i4 i5"';
+          ]]]
+      - grid-template-columns: |
+          [[[
+            return variables.refined ? "1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr" : "1fr 1fr 1fr 1fr 1fr";
+          ]]]
+      - grid-gap: 4px
+    custom_fields:
+      i1:
+        - height: 4px
+        - border-radius: 4px
+        - background-color: |
+            [[[
+              if(parseInt(entity.state) > 0)
+                return 'var(--' + variables.z_color + ')';
+              else
+                return 'var(--contrast3)';
+            ]]]
+      i2:
+        - height: 4px
+        - border-radius: 4px
+        - background-color: |
+            [[[
+              if((parseInt(entity.state) > 10 && variables.refined == true) ||
+                  (parseInt(entity.state) > 20 && variables.refined == false))
+                return 'var(--' + variables.z_color + ')';
+              else
+                return 'var(--contrast3)';
+            ]]]
+      i3:
+        - height: 4px
+        - border-radius: 4px
+        - background-color: |
+            [[[
+              if((parseInt(entity.state) > 20 && variables.refined == true) ||
+                  (parseInt(entity.state) > 40 && variables.refined == false))
+                return 'var(--' + variables.z_color + ')';
+              else
+                return 'var(--contrast3)';
+            ]]]
+      i4:
+        - height: 4px
+        - border-radius: 4px
+        - background-color: |
+            [[[
+              if((parseInt(entity.state) > 30 && variables.refined == true) ||
+                  (parseInt(entity.state) > 60 && variables.refined == false))
+                return 'var(--' + variables.z_color + ')';
+              else
+                return 'var(--contrast3)';
+            ]]]
+      i5:
+        - height: 4px
+        - border-radius: 4px
+        - background-color: |
+            [[[
+              if((parseInt(entity.state) > 40 && variables.refined == true) ||
+                  (parseInt(entity.state) > 80 && variables.refined == false))
+                return 'var(--' + variables.z_color + ')';
+              else
+                return 'var(--contrast3)';
+            ]]]
+      i6:
+        - height: 4px
+        - border-radius: 4px
+        - background-color: |
+            [[[
+              if((parseInt(entity.state) > 50 && variables.refined == true))
+                return 'var(--' + variables.z_color + ')';
+              else if(variables.refined == true)
+                return 'var(--contrast3)';
+            ]]]
+        - display: "[[[ if(variables.refined == false) return 'none'; ]]]"
+      i7:
+        - height: 4px
+        - border-radius: 4px
+        - background-color: |
+            [[[
+              if((parseInt(entity.state) > 60 && variables.refined == true))
+                return 'var(--' + variables.z_color + ')';
+              else if(variables.refined == true)
+                return 'var(--contrast3)';
+            ]]]
+        - display: "[[[ if(variables.refined == false) return 'none'; ]]]"
+      i8:
+        - height: 4px
+        - border-radius: 4px
+        - background-color: |
+            [[[
+              if((parseInt(entity.state) > 70 && variables.refined == true))
+                return 'var(--' + variables.z_color + ')';
+              else if(variables.refined == true)
+                return 'var(--contrast3)';
+            ]]]
+        - display: "[[[ if(variables.refined == false) return 'none'; ]]]"
+      i9:
+        - height: 4px
+        - border-radius: 4px
+        - background-color: |
+            [[[
+              if((parseInt(entity.state) > 80 && variables.refined == true))
+                return 'var(--' + variables.z_color + ')';
+              else if(variables.refined == true)
+                return 'var(--contrast3)';
+            ]]]
+        - display: "[[[ if(variables.refined == false) return 'none'; ]]]"
+      i10:
+        - height: 4px
+        - border-radius: 4px
+        - background-color: |
+            [[[
+              if((parseInt(entity.state) > 90 && variables.refined == true))
+                return 'var(--' + variables.z_color + ')';
+              else if(variables.refined == true)
+                return 'var(--contrast3)';
+            ]]]
+        - display: "[[[ if(variables.refined == false) return 'none'; ]]]"
+  custom_fields:
+    i1: ""
+    i2: ""
+    i3: ""
+    i4: ""
+    i5: ""
+    i6: ""
+    i7: ""
+    i8: ""
+    i9: ""
+    i10: ""

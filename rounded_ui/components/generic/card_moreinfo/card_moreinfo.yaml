@@ -1,0 +1,15 @@
+card_moreinfo:
+  show_icon: false
+  variables:
+    compact: false
+  tap_action:
+    action: more-info
+  styles:
+    card:
+      - background: none
+      - border-radius: 24px
+      - color: var(--contrast20)
+      - border: 2px solid var(--contrast5)
+      - margin-top: "[[[ return (variables.compact) ? '0' : '8px'; ]]]"
+      - padding: "[[[ return (variables.compact) ? '4px 8px' : '18px 0px'; ]]]"
+      - font-size: "[[[ return (variables.compact) ? '12px' : '16px'; ]]]"

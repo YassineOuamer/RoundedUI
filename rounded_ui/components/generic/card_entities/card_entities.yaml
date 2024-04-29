@@ -1,0 +1,80 @@
+card_entities:
+  template: card_button
+  variables:
+    side_entity_only: false
+  styles:
+    grid:
+      - grid-template-areas: |
+          [[[
+            return variables.side_entity_only ? '"space space e1" "i i e1" "n n e1" "l l e1"' : '"space space space" "i i i" "n n n" "l l l" "e1 e2 e3" "e4 e5 e6"';
+          ]]]
+      - grid-template-rows: auto 32px min-content min-content min-content min-content
+      - grid-template-columns: 1fr 1fr 1fr
+    custom_fields:
+      e1:
+        - margin-top: "[[[ return variables.side_entity_only ? 'auto' : '16px'; ]]]"
+        - margin-left: auto
+        - margin-right: auto
+        - display: "[[[ if(!variables.entity_1) return 'none'; ]]]"
+      e2:
+        - margin-top: 16px
+        - margin-left: auto
+        - margin-right: auto
+        - display: "[[[ if(!variables.entity_2) return 'none'; ]]]"
+      e3:
+        - margin-top: 16px
+        - margin-left: auto
+        - margin-right: auto
+        - display: "[[[ if(!variables.entity_3) return 'none'; ]]]"
+      e4:
+        - margin-top: 8px
+        - margin-left: auto
+        - margin-right: auto
+        - display: "[[[ if(!variables.entity_4) return 'none'; ]]]"
+      e5:
+        - margin-top: 8px
+        - margin-left: auto
+        - margin-right: auto
+        - display: "[[[ if(!variables.entity_5) return 'none'; ]]]"
+      e6:
+        - margin-top: 8px
+        - margin-left: auto
+        - margin-right: auto
+        - display: "[[[ if(!variables.entity_6) return 'none'; ]]]"
+  custom_fields:
+    e1:
+      card:
+        type: "custom:button-card"
+        template: widget_icon
+        entity: "[[[ return variables?.entity_1?.entity_id; ]]]"
+        variables: "[[[ return variables?.entity_1; ]]]"
+    e2:
+      card:
+        type: "custom:button-card"
+        template: widget_icon
+        entity: "[[[ return variables?.entity_2?.entity_id; ]]]"
+        variables: "[[[ return variables?.entity_2; ]]]"
+    e3:
+      card:
+        type: "custom:button-card"
+        template: widget_icon
+        entity: "[[[ return variables?.entity_3?.entity_id; ]]]"
+        variables: "[[[ return variables?.entity_3; ]]]"
+    e4:
+      card:
+        type: "custom:button-card"
+        template: widget_icon
+        entity: "[[[ return variables?.entity_4?.entity_id; ]]]"
+        variables: "[[[ return variables?.entity_4; ]]]"
+    e5:
+      card:
+        type: "custom:button-card"
+        template: widget_icon
+        entity: "[[[ return variables?.entity_5?.entity_id; ]]]"
+        variables: "[[[ return variables?.entity_5; ]]]"
+    e6:
+      card:
+        type: "custom:button-card"
+        template: widget_icon
+        entity: "[[[ return variables?.entity_6?.entity_id; ]]]"
+        variables: "[[[ return variables?.entity_6; ]]]"

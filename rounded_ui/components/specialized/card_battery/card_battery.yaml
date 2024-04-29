@@ -1,0 +1,17 @@
+card_battery:
+  template: card_stats
+  name: "[[[ return entity.attributes.friendly_name.endsWith('Battery') ? entity.attributes.friendly_name.slice(0, -7).trim() : entity.attributes.friendly_name; ]]]"
+  variables:
+    force_color: true
+    z_color: >
+      [[[
+        if(variables.orange_level && entity.state <= variables.orange_level) {
+          return 'orange';
+        }
+        else if(variables.red_level && entity.state <= variables.red_level) {
+          return 'red';
+        }
+        else {
+          return 'contrast2';
+        }
+      ]]]

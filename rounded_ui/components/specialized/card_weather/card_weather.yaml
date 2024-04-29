@@ -1,0 +1,63 @@
+card_weather:
+  template: card_button
+  show_icon: false
+  name: "[[[ return new Date().toLocaleTimeString('en-US', {hour12: false, hour: '2-digit', minute: '2-digit'}); ]]]"
+  label: "[[[ return new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',}); ]]]"
+  styles:
+    grid:
+      - grid-template-areas: '"temp unit weather_icon" "weather weather weather_icon" "n n n" "l l l"'
+      - grid-template-rows: auto min-content min-content min-content
+      - grid-template-columns: min-content min-content 1fr
+    name:
+      - font-size: 48px
+    custom_fields:
+      temp:
+        - font-size: 48px
+        - text-align: left
+        - align-self: baseline
+      unit:
+        - color: |
+            [[[
+              if(variables.force_color){
+                return (variables.z_color == 'contrast2') ? 'var(--contrast11)' : (variables.z_color == 'contrast20') ? 'var(--contrast1)' : 'var(--black)';
+              }
+              else {
+                return 'var(--contrast11)';
+              }
+            ]]]
+        - padding-left: 2px
+        - text-align: left
+        - font-size: 24px
+        - margin-bottom: 6px
+        - align-self: baseline
+      weather:
+        - justify-self: start
+        - font-size: 12px
+        - font-weight: 500
+        - align-self: baseline
+        - color: |
+            [[[
+              if(variables.force_color){
+                return (variables.z_color == 'contrast2') ? 'var(--contrast11)' : (variables.z_color == 'contrast20') ? 'var(--contrast1)' : 'var(--black)';
+              }
+              else {
+                return 'var(--contrast11)';
+              }
+            ]]]
+        - text-align: left
+      weather_icon:
+        - width: 256px
+        - margin: -96px -96px 0 0
+  custom_fields:
+    weather_icon: |
+      [[[
+        var weather = entity.state;
+        if(states['sun.sun']?.state == 'below_horizon')
+          var daynight = 'night';
+        else
+          var daynight = 'day';
+        return '<img src = "/local/icons/weather/' + daynight + '/' + weather + '.svg" />';
+      ]]]
+    weather: "[[[ return variables.translation_state ]]]"
+    temp: "[[[ return entity.attributes.temperature; ]]]"
+    unit: "[[[ return entity.attributes.temperature_unit; ]]]"

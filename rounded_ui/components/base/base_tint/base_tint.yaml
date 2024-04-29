@@ -1,0 +1,16 @@
+base_tint:
+  template: translation_engine
+  variables:
+    z_color: "red"
+  styles:
+    card:
+      - background-color: "[[[ return 'var(--' + variables.z_color + '-tint)'; ]]]"
+    icon:
+      - color: "[[[ return 'var(--' + variables.z_color + ')'; ]]]"
+    img_cell:
+      - border: "[[[ return '5px solid rgba(var(--' + variables.z_color + '-rgb), 0.5)'; ]]]"
+    name:
+      - color: var(--contrast20)
+    label:
+      - color: var(--contrast20)
+      - opacity: 0.5

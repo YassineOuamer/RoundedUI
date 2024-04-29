@@ -1,0 +1,14 @@
+badge_weather:
+  template: card_badge
+  name: "[[[ return entity.attributes.temperature + entity.attributes.temperature_unit; ]]]"
+  label: "[[[ return variables.translation_state ]]]"
+  show_entity_picture: true
+  entity_picture: >
+    [[[
+      var weather = entity.state;
+      if(states['sun.sun']?.state == 'below_horizon')
+        var daynight = 'night';
+      else
+        var daynight = 'day';
+      return '/local/icons/weather/' + daynight + '/' + weather + '.svg';
+    ]]]
